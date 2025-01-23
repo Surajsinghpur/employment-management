@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Payroll Management{% endblock %}
+
+{% block content %}
+<h2>Payroll Management</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Employee</th>
+            <th>Base Salary</th>
+            <th>Bonus</th>
+            <th>Deductions</th>
+            <th>Net Salary</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for payroll in payrolls %}
+        <tr>
+            <td>{{ payroll.employee.name }}</td>
+            <td>{{ payroll.employee.salary|floatformat:2 }}</td>
+            <td>{{ payroll.bonus|floatformat:2 }}</td>
+            <td>{{ payroll.deductions|floatformat:2 }}</td>
+            <td>{{ payroll.net_salary|floatformat:2 }}</td>
+            <td>
+                <a href="{% url 'payroll_update' payroll.id %}">Edit</a> |
+                <a href="{% url 'payroll_delete' payroll.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No payroll records found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'payroll_create' %}" class="btn btn-primary">Add New Payroll</a>
+<a href="{% url 'employee_list' %}" class="btn btn-secondary">Back to Employees</a>
+{% endblock %}

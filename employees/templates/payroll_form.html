@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ payroll_form.instance.id|default:"Add" }} Payroll{% endblock %}
+
+{% block content %}
+<h2>{{ payroll_form.instance.id|default:"Add" }} Payroll</h2>
+
+<form method="post">
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td>{{ form.employee.label_tag }}</td>
+            <td>{{ form.employee }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.bonus.label_tag }}</td>
+            <td>{{ form.bonus }}</td>
+        </tr>
+        <tr>
+            <td>{{ form.deductions.label_tag }}</td>
+            <td>{{ form.deductions }}</td>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'payroll_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

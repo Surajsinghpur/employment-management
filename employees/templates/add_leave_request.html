@@ -1,0 +1,14 @@
+<!-- employees/templates/employees/add_leave_request.html -->
+{% extends 'base.html' %}
+
+{% block title %}Add Leave Request{% endblock %}
+
+{% block content %}
+<h2>Add Leave Request</h2>
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<a href="{% url 'leave_requests' %}">Back to Leave Requests</a>
+{% endblock %}

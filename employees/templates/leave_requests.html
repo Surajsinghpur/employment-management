@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}Leave Requests{% endblock %}
+
+{% block content %}
+<h2>Leave Requests</h2>
+<a href="{% url 'leave_request_create' %}">Add New Leave Request</a>  <!-- Link to the create leave request page -->
+<table>
+    <tr>
+        <th>Employee</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for leave_request in leave_requests %}
+    <tr>
+        <td>{{ leave_request.employee.name }}</td>
+        <td>{{ leave_request.start_date }}</td>
+        <td>{{ leave_request.end_date }}</td>
+        <td>{{ leave_request.reason }}</td>
+        <td>{{ leave_request.status }}</td>
+        <td>
+            {% if leave_request.status == "Pending" %}
+                <a href="{% url 'leave_approve' leave_request.pk %}">Approve</a> |
+                <a href="{% url 'leave_reject' leave_request.pk %}">Reject</a>
+            {% else %}
+                <span>{{ leave_request.status }}</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'employee_list' %}">Back to Employees</a>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+{% comment %} {% extends 'base.html' %}
+
+{% block title %}Leave Requests{% endblock %}
+
+{% block content %}
+<h2>Leave Requests</h2>
+<table>
+    <tr>
+        <th>Employee</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+        <th>Reason</th>
+        <th>Status</th>
+        <th>Actions</th>
+    </tr>
+    {% for leave_request in leave_requests %}
+    <tr>
+        <td>{{ leave_request.employee.name }}</td>
+        <td>{{ leave_request.start_date }}</td>
+        <td>{{ leave_request.end_date }}</td>
+        <td>{{ leave_request.reason }}</td>
+        <td>{{ leave_request.status }}</td>
+        <td>
+            {% if leave_request.status == "Pending" %}
+                <a href="{% url 'leave_approve' leave_request.pk %}">Approve</a> |
+                <a href="{% url 'leave_reject' leave_request.pk %}">Reject</a>
+            {% else %}
+                <span>{{ leave_request.status }}</span>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{% url 'employee_list' %}">Back to Employees</a>
+{% endblock %}
+
+
+
+ {% endcomment %}
